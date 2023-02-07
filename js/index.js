@@ -57,12 +57,12 @@ monsterForm.append(inputAge,inputDescription,inputName, submitBttn)
 
 })
 
-
+const monsterBody = document.querySelector("#monster-container")
 
 //page loads show 50 monsters
 function renderMonsters(monsters){
     monsters.forEach((monster) => {
-    const monsterBody = document.querySelector("#monster-container")
+    //const monsterBody = document.querySelector("#monster-container")
     const monsterCage = document.createElement('div')
     const h2 = document.createElement('h2')
     h2.textContent = monster.name
@@ -89,20 +89,29 @@ let url = "http://localhost:3000/monsters/?_limit=50"
 const forwardBttn = document.querySelector("#forward")
 let page = 1
 forwardBttn.addEventListener("click", (e) => {
+  monsterBody.innerHTML = ""
   page++;
   return fetch(`${url}&_page=${page}`) 
   .then(response => response.json())
   .then(newPage => renderMonsters(newPage))
-
+  
  console.log("i was clicked" )
 
 })
 
 const backBttn = document.querySelector("#back")
 backBttn.addEventListener("click", (e) => {
+  page--;
+  return fetch(`${url}&_page=${page}`) 
+  .then(response => response.json())
+  .then(newPage => renderMonsters(newPage))
+
   console.log("I'm going back!" )
-  
+
 })
+  
+  
+
 
 // function nextPage(){
 //  let url = "http://localhost:3000/monsters/?_limit=50"
