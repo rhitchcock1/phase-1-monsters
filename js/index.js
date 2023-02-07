@@ -67,12 +67,13 @@ function renderMonsters(monsters){
     const h2 = document.createElement('h2')
     h2.textContent = monster.name
     monsterCage.append(h2)
-    const h3 = document.createElement('h3')
-    h3.textContent ="Age:" +  Math.floor(monster.age)
-    monsterCage.append(h3)
+    const h4 = document.createElement('h4')
+    h4.textContent ="Age:" +  Math.floor(monster.age)
+    monsterCage.append(h4)
     const p = document.createElement('p')
     p.textContent = monster.description
     monsterCage.append(p)
+    console.log(monster)
 
 
     
@@ -84,7 +85,6 @@ function renderMonsters(monsters){
 }
 
 let url = "http://localhost:3000/monsters/?_limit=50"
-//let page = page++;
 
 const forwardBttn = document.querySelector("#forward")
 let page = 1
@@ -102,19 +102,14 @@ forwardBttn.addEventListener("click", (e) => {
 const backBttn = document.querySelector("#back")
 backBttn.addEventListener("click", (e) => {
   if (page <= 1 ) {
-    alert("You can't go back to the first page")
+    alert("Aint no monsters here")
   } else {
   monsterBody.innerHTML = ""
   page--;
   return fetch(`${url}&_page=${page}`) 
   .then(response => response.json())
   .then(newPage => renderMonsters(newPage))
-  // if (page <= 1 ) {
-  //   alert("You can't go back to the first page")
-  // } else {
-   
 
-  console.log("I'm going back!" )
   }
 })
   
