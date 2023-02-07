@@ -1,4 +1,5 @@
-fetch (" http://localhost:3000/monsters/?_limit=50&_page1")
+fetch (" http://localhost:3000/monsters/?_limit=50&_page=1")
+//fetch (" http://localhost:3000/monsters/?_limit=50&_page1")
 .then(response => response.json())
 .then(monsters => renderMonsters(monsters))
 
@@ -10,20 +11,20 @@ monsterFormHolder.append(monsterForm)
 const inputName = document.createElement("input")
 inputName.type = "text"
 inputName.name = "name"
-inputName.placeholder = "Monster Name"
+inputName.placeholder = "name..."
 
 const br = document.createElement("br")
 
 const inputAge = document.createElement("input")
 inputAge.type = "number"
 inputAge.name = "age"
-inputAge.placeholder = "Monster Age"
+inputAge.placeholder = "age..."
 
 
 const inputDescription = document.createElement("input")
 inputDescription.type = "text"
 inputDescription.name = "description"
-inputDescription.placeholder = "Monster Description"
+inputDescription.placeholder = "description..."
 
 
 const submitBttn = document.createElement("button")
@@ -82,9 +83,18 @@ function renderMonsters(monsters){
 
 }
 
+let url = "http://localhost:3000/monsters/?_limit=50"
+//let page = page++;
+
 const forwardBttn = document.querySelector("#forward")
+let page = 1
 forwardBttn.addEventListener("click", (e) => {
-  console.log("i was clicked" )
+  page++;
+  return fetch(`${url}&_page=${page}`) 
+  .then(response => response.json())
+  .then(newPage => renderMonsters(newPage))
+
+ console.log("i was clicked" )
 
 })
 
@@ -94,6 +104,13 @@ backBttn.addEventListener("click", (e) => {
   
 })
 
+// function nextPage(){
+//  let url = "http://localhost:3000/monsters/?_limit=50"
+//  return fetch(`${url}&_page=${page}`) 
+
+
+
+// }
 // const monsterObj = {
 //    name: e.target.name.value, 
 //    age: "number", 
