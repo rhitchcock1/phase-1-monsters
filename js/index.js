@@ -1,4 +1,4 @@
-fetch (" http://localhost:3000/monsters/?_limit=50&_page2")
+fetch (" http://localhost:3000/monsters/?_limit=50&_page1")
 .then(response => response.json())
 .then(monsters => renderMonsters(monsters))
 
@@ -35,7 +35,25 @@ monsterForm.append(inputAge,inputDescription,inputName, submitBttn)
 
   monsterForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  
+  console.log(monsterForm)
+
+  const monsterObj = {
+    name: e.target.name.value, 
+    age: parseInt(e.target.age.value),
+    description: e.target.description.value
+ }
+
+ fetch ("http://localhost:3000/monsters/", {
+  method: "POST",
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(monsterObj)
+ })
+ .then(response => response.json())
+ .then(newMonsterObj => { console.log ('Maybe it woekded?" ', newMonsterObj)
+ renderMonsters(newMonsterObj)
+ })
+ 
+
 })
 
 
@@ -58,9 +76,53 @@ function renderMonsters(monsters){
 
     
     monsterBody.append(monsterCage)
+
     }
   )
 
 }
 
+const forwardBttn = document.querySelector("#forward")
+forwardBttn.addEventListener("click", (e) => {
+  console.log("i was clicked" )
+
+})
+
+const backBttn = document.querySelector("#back")
+backBttn.addEventListener("click", (e) => {
+  console.log("I'm going back!" )
+  
+})
+
+// const monsterObj = {
+//    name: e.target.name.value, 
+//    age: "number", 
+//    description: e.target.description.value
+//}
+// const configObj = {
+//   method: "POST" ,
+//  headers:
+//   {
+//   "Content-Type": "application/json",
+//   "Accept": "application/json"
+//  },
+//  body: JSON.stringify(monsterForm)
+//  {
+
+// }
+//fetch ("http://localhost:3000/monsters", {
+//  method: "POST" ,
+//  headers:
+//   {
+//   "Content-Type": "application/json",
+//   "Accept": "application/json"
+//  },
+//  body: JSON.stringify({
+//    Name: e.target.name.value, 
+//    Age: "number", 
+//    Description: e.target.description.value
+//  })
+// })
+//.then(function(res){ console.log(res) })
+//.catch(function(res){ console.log(res) })
 
