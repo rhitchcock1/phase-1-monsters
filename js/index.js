@@ -101,13 +101,21 @@ forwardBttn.addEventListener("click", (e) => {
 
 const backBttn = document.querySelector("#back")
 backBttn.addEventListener("click", (e) => {
+  if (page <= 1 ) {
+    alert("You can't go back to the first page")
+  } else {
+  monsterBody.innerHTML = ""
   page--;
   return fetch(`${url}&_page=${page}`) 
   .then(response => response.json())
   .then(newPage => renderMonsters(newPage))
+  // if (page <= 1 ) {
+  //   alert("You can't go back to the first page")
+  // } else {
+   
 
   console.log("I'm going back!" )
-
+  }
 })
   
   
