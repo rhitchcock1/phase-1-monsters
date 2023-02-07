@@ -2,35 +2,37 @@ fetch (" http://localhost:3000/monsters/?_limit=50&_page2")
 .then(response => response.json())
 .then(monsters => renderMonsters(monsters))
 
-const monsterFormHolder = document.querySelector("#create-monster")
+const monsterFormHolder = document.getElementById('create-monster')
 const monsterForm = document.createElement("form")
-//monsterFormHolder.classname = 'monster-form'
+console.log(monsterFormHolder)
+monsterFormHolder.append(monsterForm)
+
 const inputName = document.createElement("input")
 inputName.type = "text"
 inputName.name = "name"
 inputName.placeholder = "Monster Name"
-inputName.append(monsterForm)
+
 const br = document.createElement("br")
-br.append(monsterForm)
+
 const inputAge = document.createElement("input")
 inputAge.type = "number"
 inputAge.name = "age"
 inputAge.placeholder = "Monster Age"
-inputAge.append(monsterForm)
-br.append(monsterForm)
+
+
 const inputDescription = document.createElement("input")
 inputDescription.type = "text"
 inputDescription.name = "description"
 inputAge.placeholder = "Monster Description"
-inputDescription.append(monsterForm)
-br.append(monsterForm)
+
+
 const submitBttn = document.createElement("button")
 submitBttn.type = "submit"
 submitBttn.name = "submit"
 submitBttn.value = "Create Monster"
-submitBttn.append(monsterForm)
+monsterForm.append(inputAge, br ,inputDescription, br ,inputName, submitBttn)
 
-monsterFormHolder.append(monsterForm)
+
   monsterForm.addEventListener("submit", (e) => {
   e.preventDefault();
   
