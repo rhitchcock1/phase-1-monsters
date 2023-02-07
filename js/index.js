@@ -23,14 +23,14 @@ inputAge.placeholder = "Monster Age"
 const inputDescription = document.createElement("input")
 inputDescription.type = "text"
 inputDescription.name = "description"
-inputAge.placeholder = "Monster Description"
+inputDescription.placeholder = "Monster Description"
 
 
 const submitBttn = document.createElement("button")
 submitBttn.type = "submit"
 submitBttn.name = "submit"
-submitBttn.value = "Create Monster"
-monsterForm.append(inputAge, br ,inputDescription, br ,inputName, submitBttn)
+submitBttn.textContent = "Create Monster"
+monsterForm.append(inputAge,inputDescription,inputName, submitBttn)
 
 
   monsterForm.addEventListener("submit", (e) => {
